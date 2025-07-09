@@ -1,31 +1,11 @@
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
+import { MyContext } from "../../App";
 
-let initialState = {
-    count: 0
-}
-const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case "+": {
-            return {...state, count: state.count + action.payload}
-        }
-        case "-": {
-            return {...state, count: state.count - action.payload}
-        }
-        case "+5": {
-            return {...state, count: state.count + action.payload}
-        }
-        case "reset": {
-            return initialState;
-        }
-            
-        default:
-            return state;
-    }
-}
+
 
 const Counter = () => {
 
-    const [counter, dispatch] = useReducer(reducer, initialState);
+    let {counter, dispatch} = useContext(MyContext);
 
     return(
         <div className="counter">

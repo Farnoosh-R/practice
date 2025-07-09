@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useEffect, useReducer, useState } from 'react'
 import './App.css'
 import Products from './components/products/products'
 import Counter from './components/Counter/Counter'
+import reducerCounter from './reducers/reducerCounter';
+
 
 export let MyContext = React.createContext();
+
+let initialState = {
+    count: 0
+}
 
 function App() {
 
   const [products, setProducts] = useState([]);
+  const [counter, dispatch] = useReducer(reducerCounter, initialState);
   
   const fetsProducts = async () => {
     try {
@@ -29,7 +34,7 @@ function App() {
   }, [])
 
   return (
-    <MyContext.Provider value={{products}}>
+    <MyContext.Provider value={{products: products, counter: counter, dispatch: dispatch}}>
       <Products />
       <Counter />
       </MyContext.Provider>
