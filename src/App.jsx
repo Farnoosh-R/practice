@@ -3,6 +3,10 @@ import './App.css'
 import Products from './components/products/products'
 import Counter from './components/Counter/Counter'
 import reducerCounter from './reducers/reducerCounter';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ProductsList from './pages/ProductsList';
+import Home from './pages/Home';
+import Header from './components/Header/Header';
 
 
 export let MyContext = React.createContext();
@@ -34,10 +38,16 @@ function App() {
   }, [])
 
   return (
+    <BrowserRouter>
     <MyContext.Provider value={{products: products, counter: counter, dispatch: dispatch}}>
-      <Products />
-      <Counter />
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />}/>
+        <Route path='/productsList' element={<ProductsList />}/>
+        <Route path='/counter' element={<Counter />}/>
+      </Routes>
       </MyContext.Provider>
+      </BrowserRouter>
   )
 }
 
