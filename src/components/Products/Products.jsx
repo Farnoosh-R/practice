@@ -10,7 +10,7 @@ let {products} = useContext(MyContext);
         <div className="products flex flex-wrap">
             {products?.map((item) => {
                 return(
-                    <Product item={item} key={item.key}/>
+                    <Product item={item} key={item.id}/>
                 )
             })}
         </div>

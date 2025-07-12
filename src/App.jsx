@@ -7,6 +7,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProductsList from './pages/ProductsList';
 import Home from './pages/Home';
 import Header from './components/Header/Header';
+import ProductsShopList from './pages/ProductsShopList';
+import ProductShow from './components/ProductsShop/ProductShow';
+
 
 
 export let MyContext = React.createContext();
@@ -19,6 +22,7 @@ function App() {
 
   const [products, setProducts] = useState([]);
   const [counter, dispatch] = useReducer(reducerCounter, initialState);
+  const [productsShop, setProductsShop] = useState([]);
   
   const fetsProducts = async () => {
     try {
@@ -33,18 +37,31 @@ function App() {
     }
   }
 
+  const fetchProductsShop = async () => {
+    let res = await fetch("https://fakestoreapi.com/products");
+    let data = await res.json();
+    setProductsShop(data);
+    
+  }
+
   useEffect(() => {
     fetsProducts();
   }, [])
 
+  useEffect(() => {
+    fetchProductsShop();
+  }, [])
+
   return (
     <BrowserRouter>
-    <MyContext.Provider value={{products: products, counter: counter, dispatch: dispatch}}>
+    <MyContext.Provider value={{products: products, counter: counter, dispatch: dispatch, productsShop: productsShop}}>
       <Header />
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/productsList' element={<ProductsList />}/>
         <Route path='/counter' element={<Counter />}/>
+        <Route path='/productsshop' element={<ProductsShopList />}/>
+        <Route path='productsshop/:id' element={<ProductShow />} />
       </Routes>
       </MyContext.Provider>
       </BrowserRouter>
