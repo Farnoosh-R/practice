@@ -3,7 +3,7 @@ import './App.css'
 import Products from './components/products/products'
 import Counter from './components/Counter/Counter'
 import reducerCounter from './reducers/reducerCounter';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import ProductsList from './pages/ProductsList';
 import Home from './pages/Home';
 import Header from './components/Header/Header';
@@ -78,7 +78,7 @@ function App() {
         <Route path='/counter' element={<Counter />}/>
         <Route path='/productsshop' element={<ProductsShopList />}/>
         <Route path='/productsshop/:id' element={<ProductShow />} />
-        <Route path='/commodities' element={login === true ? <Commodities /> : <Home />} />
+        <Route path='/commodities' element={login === true ? <Commodities /> : <Navigate to='/' />} />
         <Route path='/commodities/:id' element={<CommodityShow />} />
       </Routes>
       
