@@ -26,6 +26,7 @@ function App() {
   const [counter, dispatch] = useReducer(reducerCounter, initialState);
   const [productsShop, setProductsShop] = useState([]);
   const [commodities, setCommodities] = useState([]);
+  const [login, setLogin] = useState(false);
   
   const fetsProducts = async () => {
     try {
@@ -70,13 +71,14 @@ function App() {
     <BrowserRouter>
     <MyContext.Provider value={{products: products, counter: counter, dispatch: dispatch, productsShop: productsShop, commodities: commodities}}>
       <Header />
+      <button className={`${login === true ? "bg-red-600" : "bg-emerald-600"} rounded-3xl px-3 py-2 my-5`} onClick={() => setLogin(!login)}>{login === true ? "Logout" : "Login"}</button>
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/productsList' element={<ProductsList />}/>
         <Route path='/counter' element={<Counter />}/>
         <Route path='/productsshop' element={<ProductsShopList />}/>
         <Route path='/productsshop/:id' element={<ProductShow />} />
-        <Route path='/commodities' element={<Commodities />} />
+        <Route path='/commodities' element={login === true ? <Commodities /> : <Home />} />
         <Route path='/commodities/:id' element={<CommodityShow />} />
       </Routes>
       

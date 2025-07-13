@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 const CommodityShow = () => {
   const { id } = useParams();
+
+  const query = new URLSearchParams(useLocation().search)
+  const result = query.get("test")
+  console.log('resulr:' + result)
+
   const [commodities, setCommodities] = useState([]);
   const fetchCommodities = async () => {
     let res = await fetch(`https://fakestoreapi.com/products/${id}`);
