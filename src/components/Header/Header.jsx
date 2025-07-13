@@ -7,6 +7,7 @@ const Header = () => {
             <NavLink to='/productsList' className={({ isActive }) =>`${isActive ? "bg-orange-500" : "bg-lime-500"} hover:bg-lime-700 text-white font-bold py-2 px-4 border border-blue-700 rounded`}>Products</NavLink>
             <NavLink to='/counter' className={({isActive}) => `${isActive ? "bg-orange-500" : "bg-lime-500"} hover:bg-lime-700 text-white font-bold py-2 px-4 border border-blue-700 rounded`}>Counter</NavLink>
             <NavLink to='/productsshop' className={({isActive}) => `${isActive ? "bg-orange-500" : "bg-lime-500"} hover:bg-lime-700 text-white font-bold py-2 px-4 border border-blue-700 rounded`}>ProductsShop</NavLink>
+            <NavLink to='/commodities' className={({isActive}) => `${isActive ? "bg-orange-500" : "bg-lime-500"} hover:bg-lime-700 text-white font-bold py-2 px-4 border border-blue-700 rounded`}>Commodities</NavLink>
         </div>
     )
 }

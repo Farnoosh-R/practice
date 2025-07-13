@@ -9,6 +9,8 @@ import Home from './pages/Home';
 import Header from './components/Header/Header';
 import ProductsShopList from './pages/ProductsShopList';
 import ProductShow from './components/ProductsShop/ProductShow';
+import Commodities from './components/Commodities/Commodities';
+import CommodityShow from './components/Commodities/CommodityShow';
 
 
 
@@ -23,6 +25,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [counter, dispatch] = useReducer(reducerCounter, initialState);
   const [productsShop, setProductsShop] = useState([]);
+  const [commodities, setCommodities] = useState([]);
   
   const fetsProducts = async () => {
     try {
@@ -41,28 +44,42 @@ function App() {
     let res = await fetch("https://fakestoreapi.com/products");
     let data = await res.json();
     setProductsShop(data);
-    
+  }
+
+  const fetchCommodities = async () => {
+      try {
+
+        let res = await fetch("https://fakestoreapi.com/products");
+        let data = await res.json();
+        setCommodities(data);
+
+      } catch (err) {
+        console.log(err.message)
+        
+      }
   }
 
   useEffect(() => {
     fetsProducts();
+    fetchProductsShop();
+    fetchCommodities();
   }, [])
 
-  useEffect(() => {
-    fetchProductsShop();
-  }, [])
 
   return (
     <BrowserRouter>
-    <MyContext.Provider value={{products: products, counter: counter, dispatch: dispatch, productsShop: productsShop}}>
+    <MyContext.Provider value={{products: products, counter: counter, dispatch: dispatch, productsShop: productsShop, commodities: commodities}}>
       <Header />
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/productsList' element={<ProductsList />}/>
         <Route path='/counter' element={<Counter />}/>
         <Route path='/productsshop' element={<ProductsShopList />}/>
-        <Route path='productsshop/:id' element={<ProductShow />} />
+        <Route path='/productsshop/:id' element={<ProductShow />} />
+        <Route path='/commodities' element={<Commodities />} />
+        <Route path='/commodities/:id' element={<CommodityShow />} />
       </Routes>
+      
       </MyContext.Provider>
       </BrowserRouter>
   )
